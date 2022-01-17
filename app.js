@@ -1,6 +1,7 @@
 // element selectors
 
 let timeEl = document.querySelector(".time");
+let startButton = document.getElementById("start")
 
 
 //global variables
@@ -8,6 +9,11 @@ let timeEl = document.querySelector(".time");
 let 
 
 
+
+// init function called when page loads
+function init() {
+  getHighscore();  
+}
 
 // timer function
 
@@ -25,3 +31,13 @@ function timer() {
     }
   }, 1000);
 }
+
+// start button function for quiz
+
+startButton.addEventListener("click", function(event) {
+  event.preventDefault();
+  console.log("button clicked");
+  if(secondsLeft == 0 || secondsLeft == true){
+  timer();
+  }
+});

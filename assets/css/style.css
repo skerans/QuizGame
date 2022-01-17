@@ -4,9 +4,23 @@ body{
   width:100vw;
   height: 100vh;    
 }
+nav{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
 
+nav a{
+  text-decoration: none;
+}
 
+.scores{
+  margin: 10px 5vw;
+}
 
+.time{
+  margin-right: 10vw;
+}
 .container{
   height: 100vh;
   display: flex;
@@ -34,7 +48,7 @@ body{
   font-size: 50px;
     
 }
-.button-container{
+.answer-container{
   display: flex;
   flex-direction: column;
   justify-content: space-around; 
@@ -44,14 +58,14 @@ body{
   background-color: #9eb1b3;   
       
 }
-.option{    
+.answer{    
   padding: 10px;
   width: 10vw;
   height: 5vh;
   font-size: larger;
   background-color: #E6E6FA;
 }
-.option:hover{
+.answer:hover{
   background-color: #808080;
 }
 
