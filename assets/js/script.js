@@ -4,6 +4,10 @@ const timeEl = document.querySelector(".time");
 const startButton = document.getElementById("start");
 const questionText = document.getElementById("question");
 const scores = document.getElementById("score");
+const answer1 = document.getElementById("answer-1");
+const answer2 = document.getElementById("answer-2");
+const answer3 = document.getElementById("answer-3");
+const answer4 = document.getElementById("answer-4");
 
 //global variables
 
@@ -44,11 +48,28 @@ var questions = [
     }
   }
 
-randomizeArr(questions);
-console.log(questions);
+// randomizeArr(questions);
+// console.log(questions);
+
+
+function getQuestion() {
+  chosenQuestion = questions[Math.floor(Math.random() * questions.length)];
+  randomizeArr(chosenQuestion.answers);
+  questionText.textContent = chosenQuestion.question;
+  answer1.textContent = chosenQuestion.answers[0];
+  answer1.value = chosenQuestion.answers[0];
+  answer2.textContent = chosenQuestion.answers[1];
+  answer2.value = chosenQuestion.answers[1];
+  answer3.textContent = chosenQuestion.answers[2];
+  answer3.value = chosenQuestion.answers[2];
+  answer4.textContent = chosenQuestion.answers[3];
+  answer4.value = chosenQuestion.answers[3];
+};
 
 
 
+
+getQuestion();
 
 // timer function
 
