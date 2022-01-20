@@ -8,6 +8,7 @@ const answer1 = document.getElementById("answer-1");
 const answer2 = document.getElementById("answer-2");
 const answer3 = document.getElementById("answer-3");
 const answer4 = document.getElementById("answer-4");
+const answerBtns = document.querySelectorAll(".answer");
 
 //global variables
 
@@ -17,59 +18,89 @@ let score = 0;
 
 var questions = [
   {
-    question: "question 1",
-    answers: ["a", "b", "c", "d"],
+    question: "fish",
+    answers: ["tuna", "mackeral", "salmon", "cod"],
+    answerIndex: "tuna",
   },
   {
-    question: "question 2",
-    answers: ["a", "b", "c", "d"],
+    question: "planets",
+    answers: ["earth", "mars", "venus", "jupiter"],
+    answerIndex: "earth"
   },
   {
     question: "question 3",
     answers: ["a", "b", "c", "d"],
+    answerIndex: "a"
   },
   {
     question: "question 4",
     answers: ["a", "b", "c", "d"],
+    answerIndex: "a"
   },
   {
     question: "question 5",
     answers: ["a", "b", "c", "d"],
+    answerIndex: "a"
   }
   ]
 
-  // shuffle array of answers/questions
-  function randomizeArr(arr) {
-    for(let i = arr.length - 1; i > 0; i--){
-      const j = Math.floor(Math.random() * (i + 1));
-      const tmp = arr[i];
-      arr[i] = arr[j];
-      arr[j] = tmp;
-    }
+  // let chosenQuestion = questions[Math.floor(Math.random() * questions.length)];
+
+
+  let chosenQuestion = [];
+
+  function getQuestion() {
+  // let tmpAnswer = randomizeArr(questions);
+  // console.log(tmpAnswer);
+  // let correctAnswer = tmpAnswer[0];
+  for(i=0; i < questions.length; i++) {
+    console.log(questions[i]);
+    chosenQuestion = questions[i];
+  
+
+  const tmpArr = [...chosenQuestion.answers];
+  const randomArr = [];
+  while(tmpArr.length > 0) {
+    const index = Math.floor(Math.random() * tmpArr.length);
+    randomArr.push(tmpArr[index]);
+    tmpArr.splice(index, 1);
   }
 
-// randomizeArr(questions);
-// console.log(questions);
 
 
-function getQuestion() {
-  chosenQuestion = questions[Math.floor(Math.random() * questions.length)];
-  randomizeArr(chosenQuestion.answers);
   questionText.textContent = chosenQuestion.question;
-  answer1.textContent = chosenQuestion.answers[0];
-  answer1.value = chosenQuestion.answers[0];
-  answer2.textContent = chosenQuestion.answers[1];
-  answer2.value = chosenQuestion.answers[1];
-  answer3.textContent = chosenQuestion.answers[2];
-  answer3.value = chosenQuestion.answers[2];
-  answer4.textContent = chosenQuestion.answers[3];
-  answer4.value = chosenQuestion.answers[3];
+  answer1.textContent = randomArr[0];
+  answer1.value = randomArr[0];
+  answer2.textContent = randomArr[1];
+  answer2.value = randomArr[1];
+  answer3.textContent = randomArr[2];
+  answer3.value = randomArr[2];
+  answer4.textContent = randomArr[3];
+  answer4.value = randomArr[3];
+
+  }
 };
 
-
-
+// answerBtns.addEventListener('click', )
 
 getQuestion();
+
+answerBtns.forEach(function (n) {
+  n.addEventListener('click', function (event) {
+    console.log(chosenQuestion.answerIndex);
+    console.log(event.target.innerHTML);
+    if(event.target.innerHTML === chosenQuestion.answerIndex) {
+      console.log("it worked");
+      score++;
+    } else {
+    }
+    getQuestion();
+  })
+});
+
+
+
+
 
 // timer function
 
@@ -104,4 +135,29 @@ function timer() {
 // });
 
 
+
+// shuffle array of answers/questions
+function randomizeArr(arr) {
+  let newArr = arr.slice();
+  for(let i = arr.length - 1; i > 0; i--){
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+  return newArr;
+}
+
+
+// function randomizeArr(arr) {
+//   let chosenQuestion = arr[Math.floor(Math.random() * arr.length)];
+//   const tmpArr = [...chosenQuestion.answers];
+//   const randomArr = [];
+//   while(tmpArr.length > 0) {
+//     const index = Math.floor(Math.random() * tmpArr.length);
+//     randomArr.push(tmpArr[index]);
+//     tmpArr.splice(index, 1);
+//   }
+//   return randomArr;
+// }
 

@@ -28,15 +28,35 @@
       </div>
 
       <div class="answer-container">
-          <button class="answer" id="answer-1" ></button>
+          <button class="answer" id="answer-1" value="a"></button>
       
-          <button class="answer" id="answer-2" ></button>
+          <button class="answer" id="answer-2" value="b"></button>
       
-          <button class="answer" id="answer-3"></button>
+          <button class="answer" id="answer-3" value="c"></button>
       
-          <button class="answer" id="answer-4"></button>
+          <button class="answer" id="answer-4" value="d"></button>
       </div>
     </div>
-    <script src="./assets/js/script.js"></script>
+    <script src="./assets/js/script.js" defer></script>
 </body>
 </html>
+
+
+
+
+<!-- event listener for js
+answerBtns.forEach(function (n) {
+  n.addEventListener('click', function () {
+    let chosenQuestion = questions[Math.floor(Math.random() * questions.length)];
+    let correctAnswer = chosenQuestion.answers[0];
+    console.log(correctAnswer);
+
+
+    if(this.value == correctAnswer.value) {
+      console.log("it worked");
+    } else {
+    }
+
+  })
+});
+ -->
