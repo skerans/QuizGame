@@ -84,5 +84,7 @@ nav a{
   background-color: #BF3325;
 }
 
-
+.hide{
+  display: none;
+}
 

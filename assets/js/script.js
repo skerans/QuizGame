@@ -9,6 +9,10 @@ const answer2 = document.getElementById("answer-2");
 const answer3 = document.getElementById("answer-3");
 const answer4 = document.getElementById("answer-4");
 const answerBtns = document.querySelectorAll(".answer");
+const gameContainer = document.querySelector(".game-container");
+const highscoreContainer = document.querySelector(".highscore-container");
+
+
 
 //global variables
 
@@ -42,30 +46,44 @@ var questions = [
     answers: ["a", "b", "c", "d"],
     answerIndex: "a"
   }
-  ]
-
-  // let chosenQuestion = questions[Math.floor(Math.random() * questions.length)];
+]
 
 
-  let chosenQuestion = [];
 
-  function getQuestion() {
+function randomizeArr(arr) {
+  for (let i = arr.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    const tmp = arr[i];
+    arr[i] = arr[j];
+    arr[j] = tmp;
+  }
+  return arr;
+}
+
+console.log(questions);
+
+
+let chosenQuestion = [];
+let count = 0;
+const questionArray = randomizeArr(questions);
+console.log(questionArray);
+
+function getQuestion() {
   // let tmpAnswer = randomizeArr(questions);
   // console.log(tmpAnswer);
   // let correctAnswer = tmpAnswer[0];
-  for(i=0; i < questions.length; i++) {
-    console.log(questions[i]);
-    chosenQuestion = questions[i];
-  
+
+  console.log(questionArray[count]);
+  chosenQuestion = questionArray[count];
+
 
   const tmpArr = [...chosenQuestion.answers];
   const randomArr = [];
-  while(tmpArr.length > 0) {
+  while (tmpArr.length > 0) {
     const index = Math.floor(Math.random() * tmpArr.length);
     randomArr.push(tmpArr[index]);
     tmpArr.splice(index, 1);
   }
-
 
 
   questionText.textContent = chosenQuestion.question;
@@ -78,10 +96,10 @@ var questions = [
   answer4.textContent = randomArr[3];
   answer4.value = randomArr[3];
 
-  }
+  count++;
 };
 
-// answerBtns.addEventListener('click', )
+
 
 getQuestion();
 
@@ -89,22 +107,28 @@ answerBtns.forEach(function (n) {
   n.addEventListener('click', function (event) {
     console.log(chosenQuestion.answerIndex);
     console.log(event.target.innerHTML);
-    if(event.target.innerHTML === chosenQuestion.answerIndex) {
+    if (event.target.innerHTML === chosenQuestion.answerIndex) {
       console.log("it worked");
       score++;
+      console.log(score);
     } else {
+      console.log("wrong answer");
     }
+    if(count < questionArray.length){
     getQuestion();
+    } else {
+      //switch hide class from game container and highscore container
+      gameContainer.classList.add('hide');
+      highscoreContainer.classList.remove('hide');
+    }
   })
 });
 
 
 
-
-
 // timer function
 
-function timer() {  
+function timer() {
   secondsLeft = 60;
   let timerInterval = setInterval(function () {
     secondsLeft--;
@@ -113,9 +137,8 @@ function timer() {
     if (secondsLeft == 0) {
       clearInterval(timerInterval);
       timeEl.textContent = "Out of time";
-    } else {
-
     }
+
   }, 1000);
 }
 
@@ -137,16 +160,7 @@ function timer() {
 
 
 // shuffle array of answers/questions
-function randomizeArr(arr) {
-  let newArr = arr.slice();
-  for(let i = arr.length - 1; i > 0; i--){
-    const j = Math.floor(Math.random() * (i + 1));
-    const tmp = arr[i];
-    arr[i] = arr[j];
-    arr[j] = tmp;
-  }
-  return newArr;
-}
+
 
 
 // function randomizeArr(arr) {
