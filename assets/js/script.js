@@ -89,7 +89,6 @@ function getQuestion() {
     tmpArr.splice(index, 1);
   }
 
-
   questionText.textContent = chosenQuestion.question;
   answer1.textContent = randomArr[0];
   answer1.value = randomArr[0];
@@ -141,12 +140,14 @@ startBtn.addEventListener('click', function (event) {
 //save your highscore
 highscoreBtn.addEventListener('click', function (event) {
   event.preventDefault();
+
   const name = highscoreInitials.value.trim();
   let li = document.createElement('li');
   li.textContent = ` ${name}:  ${score}`;
   highScores.appendChild(li);
-  let newScore = { name, score };
-  localStorage.setItem('score', JSON.stringify(newScore));
+  let newScore = {name, score};
+  highscore.push(newScore);
+  localStorage.setItem('score', JSON.stringify(highscore));
 
   this.disabled = true;
   score = 0;
@@ -182,28 +183,36 @@ function timer() {
 
 function getHighscores() {
 
-  highScores.innerHTML = "";
+  // highScores.innerHTML = "";
 
   for (let i = 0; i < highscore.length; i++) {
+    let tmpHS = highscore[i];
+    console.log(tmpHS);
+    let li = document.createElement('li');
+    li.textContent = `${tmpHS.name}:  ${tmpHS.score}`;
+    highScores.appendChild(li);
     
   }
-
-
 }
 
 
-
+//startup function
 
 function init() {
-  let storedHighscores = JSON.parse(localStorage.getItem('score'));
-
-
-
   getQuestion();
+ 
+  let storedHighscores = JSON.parse(localStorage.getItem('score'));
+  if (storedHighscores != null) {
+  let tmpArray = [];
+  highscore = tmpArray.concat(storedHighscores);
+  console.log(highscore);
+    
+  }
+  getHighscores();
 
 }
 
-
+init();
 
 
 // shuffle array of answers/questions
