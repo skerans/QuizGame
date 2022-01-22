@@ -20,8 +20,12 @@
 
 
     <div class="container">
+      <div class="start-container">
+        <p>Start Game?</p>
+        <button class="start">Start Game</button>
+      </div>
 
-      <div class="game-container">
+      <div class="game-container hide">
       <div class="question-container">
           <p>  Question: 
             <br>
@@ -40,14 +44,18 @@
       </div>
 
       <div class="highscore-container hide">
-        <p></p>
+        <p>Enter Initials</p>
 
         <div class="inital-container">
 
-          <input type="text" class="highscore">
+          <input type="text" class="highscore-initials">
           
-          <button class="">Submit</button>
+          <button class="highscore-btn">Submit</button>
+          <button class="retry-btn">Replay?</button>
         </div>
+        <ol class="highscores">
+            <li>Highscore 1</li>
+        </ol>
       </div>
     </div>
     <script src="./assets/js/script.js" defer></script>

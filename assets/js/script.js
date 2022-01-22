@@ -11,12 +11,20 @@ const answer4 = document.getElementById("answer-4");
 const answerBtns = document.querySelectorAll(".answer");
 const gameContainer = document.querySelector(".game-container");
 const highscoreContainer = document.querySelector(".highscore-container");
-
-
+const startBtn = document.querySelector('.start');
+const startContainer = document.querySelector('.start-container');
+const highscoreBtn = document.querySelector('.highscore-btn')
+const highscoreInitials = document.querySelector('.highscore-initials');
+const highScores = document.querySelector('.highscores');
+const retryBtn = document.querySelector('.retry-btn');
 
 //global variables
 
 let score = 0;
+let chosenQuestion = [];
+let count = 0;
+
+let highscore = [];
 
 // question section, had to put at top due to hoisting issues
 
@@ -49,7 +57,7 @@ var questions = [
 ]
 
 
-
+//randomize question array 
 function randomizeArr(arr) {
   for (let i = arr.length - 1; i > 0; i--) {
     const j = Math.floor(Math.random() * (i + 1));
@@ -60,23 +68,19 @@ function randomizeArr(arr) {
   return arr;
 }
 
-console.log(questions);
 
 
-let chosenQuestion = [];
-let count = 0;
+
+
 const questionArray = randomizeArr(questions);
-console.log(questionArray);
+
 
 function getQuestion() {
-  // let tmpAnswer = randomizeArr(questions);
-  // console.log(tmpAnswer);
-  // let correctAnswer = tmpAnswer[0];
 
   console.log(questionArray[count]);
   chosenQuestion = questionArray[count];
 
-
+  //randomize answers and push them into the button values
   const tmpArr = [...chosenQuestion.answers];
   const randomArr = [];
   while (tmpArr.length > 0) {
@@ -101,10 +105,9 @@ function getQuestion() {
 
 
 
-getQuestion();
-
 answerBtns.forEach(function (n) {
   n.addEventListener('click', function (event) {
+    event.preventDefault();
     console.log(chosenQuestion.answerIndex);
     console.log(event.target.innerHTML);
     if (event.target.innerHTML === chosenQuestion.answerIndex) {
@@ -113,9 +116,10 @@ answerBtns.forEach(function (n) {
       console.log(score);
     } else {
       console.log("wrong answer");
+      secondsLeft -= 5;
     }
-    if(count < questionArray.length){
-    getQuestion();
+    if (count < questionArray.length) {
+      getQuestion();
     } else {
       //switch hide class from game container and highscore container
       gameContainer.classList.add('hide');
@@ -124,6 +128,40 @@ answerBtns.forEach(function (n) {
   })
 });
 
+
+//Game start button
+startBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+  gameContainer.classList.remove('hide');
+  startContainer.classList.add('hide');
+  timer();
+
+})
+
+//save your highscore
+highscoreBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+  const name = highscoreInitials.value.trim();
+  let li = document.createElement('li');
+  li.textContent = ` ${name}:  ${score}`;
+  highScores.appendChild(li);
+  let newScore = { name, score };
+  localStorage.setItem('score', JSON.stringify(newScore));
+
+  this.disabled = true;
+  score = 0;
+  count = 0;
+});
+
+
+// reset button
+retryBtn.addEventListener('click', function (event) {
+  event.preventDefault();
+  highscoreBtn.disabled = false;
+  highscoreContainer.classList.add('hide');
+  startContainer.classList.remove('hide');
+
+});
 
 
 // timer function
@@ -142,20 +180,29 @@ function timer() {
   }, 1000);
 }
 
+function getHighscores() {
+
+  highScores.innerHTML = "";
+
+  for (let i = 0; i < highscore.length; i++) {
+    
+  }
+
+
+}
 
 
 
 
+function init() {
+  let storedHighscores = JSON.parse(localStorage.getItem('score'));
 
-// start button function for quiz
 
-// startButton.addEventListener("click", function(event) {
-//   event.preventDefault();
-//   console.log("button clicked");
-//   if(secondsLeft == 0 || secondsLeft == true){
-//   timer();
-//   }
-// });
+
+  getQuestion();
+
+}
+
 
 
 
