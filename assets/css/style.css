@@ -57,7 +57,7 @@ nav a{
   margin: 10px;
   padding: 5px;
   height: 20vh;
-  background-color: #9eb1b3;   
+  background-color: lavender;   
       
 }
 .answer{    
@@ -76,10 +76,8 @@ nav a{
   padding: 5px;
   font-size: larger;
 }
-.evaluate{
-  
-  background-color: #50DBB4;
-}
+
+
 .next{
   color: white;
   background-color: #BF3325;

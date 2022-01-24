@@ -23,36 +23,35 @@ const retryBtn = document.querySelector('.retry-btn');
 let score = 0;
 let chosenQuestion = [];
 let count = 0;
-
 let highscore = [];
 
 // question section, had to put at top due to hoisting issues
 
 var questions = [
   {
-    question: "fish",
-    answers: ["tuna", "mackeral", "salmon", "cod"],
-    answerIndex: "tuna",
+    question: "Which planet spins in the opposite direction from all the others?",
+    answers: ["Neptune", "Mercury", "Venus", "Saturn"],
+    answerIndex: "Venus",
   },
   {
-    question: "planets",
-    answers: ["earth", "mars", "venus", "jupiter"],
-    answerIndex: "earth"
+    question: "What is the largest planet in our solar system?",
+    answers: ["Earth", "Mars", "Venus", "Jupiter"],
+    answerIndex: "jupiter"
   },
   {
-    question: "question 3",
-    answers: ["a", "b", "c", "d"],
-    answerIndex: "a"
+    question: "Which planet has the longest valley?",
+    answers: ["Mars", "Earth", "Venus", "Jupiter"],
+    answerIndex: "Mars"
   },
   {
-    question: "question 4",
-    answers: ["a", "b", "c", "d"],
-    answerIndex: "a"
+    question: "What is the smallest planet?",
+    answers: ["Pluto", "Earth", "Mercury", "Neptune"],
+    answerIndex: "Mercury"
   },
   {
-    question: "question 5",
-    answers: ["a", "b", "c", "d"],
-    answerIndex: "a"
+    question: "Of the total mass of the solar system, what percentage does the sun take up?",
+    answers: ["Less than 50", "75", "95", "More than 99"],
+    answerIndex: "More than 99"
   }
 ]
 
@@ -67,8 +66,6 @@ function randomizeArr(arr) {
   }
   return arr;
 }
-
-
 
 
 
@@ -115,7 +112,7 @@ answerBtns.forEach(function (n) {
       console.log(score);
     } else {
       console.log("wrong answer");
-      secondsLeft -= 5;
+      secondsLeft -= 10;
     }
     if (count < questionArray.length) {
       getQuestion();
@@ -148,7 +145,6 @@ highscoreBtn.addEventListener('click', function (event) {
   let newScore = {name, score};
   highscore.push(newScore);
   localStorage.setItem('score', JSON.stringify(highscore));
-
   this.disabled = true;
   score = 0;
   count = 0;
@@ -159,9 +155,7 @@ highscoreBtn.addEventListener('click', function (event) {
 retryBtn.addEventListener('click', function (event) {
   event.preventDefault();
   highscoreBtn.disabled = false;
-  highscoreContainer.classList.add('hide');
-  startContainer.classList.remove('hide');
-
+  location.reload();
 });
 
 
@@ -182,8 +176,6 @@ function timer() {
 }
 
 function getHighscores() {
-
-  // highScores.innerHTML = "";
 
   for (let i = 0; i < highscore.length; i++) {
     let tmpHS = highscore[i];
