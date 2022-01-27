@@ -41,15 +41,7 @@ nav a{
   text-align: center;
 }
 
-.result{
-  margin: 10px;
-  padding: 5px;
-  width:80vw;
-  height: 10vh;
-  text-align: center;
-  font-size: 50px;
-    
-}
+
 .answer-container{
   display: flex;
   flex-direction: column;
@@ -63,25 +55,13 @@ nav a{
 .answer{    
   padding: 10px;
   height: 5vh;
-  font-size: larger;
+  font-size: large;
   background-color: #E6E6FA;
 }
 .answer:hover{
   background-color: #808080;
 }
 
-.evaluate,.next{
-  width:30vw;
-  height: 8vh;
-  padding: 5px;
-  font-size: larger;
-}
-
-
-.next{
-  color: white;
-  background-color: #BF3325;
-}
 
 .hide{
   display: none;
